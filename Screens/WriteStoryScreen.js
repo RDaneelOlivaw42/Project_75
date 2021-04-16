@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput , TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, TextInput , TouchableOpacity, KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import AppHeader from "../AppHeader";
 import db from "../config";
 import firebase from 'firebase';
@@ -7,12 +7,14 @@ import firebase from 'firebase';
 
 export default class WriteStoryScreen extends React.Component{
 
+
     constructor(){
         super();
         this.state = {
             storyTitle: '',
             storyAuthor: '',
-            story: ''
+            story: '',
+            transactionMessage: '',
         }
     }
 
@@ -31,19 +33,22 @@ export default class WriteStoryScreen extends React.Component{
         this.setState({
             storyTitle: '',
             storyAuthor: '',
-            story: ''
+            story: '',
+            transactionId: "Story Submitted!"
         });
+
     }
 
 
     render(){
         return(
-            <View>
+            <KeyboardAvoidingView>
                 <AppHeader />
 
                 <TextInput 
                   placeholder = "Story Title"
                   style = {styles.titleInputBox}
+                  placeholderTextColor =  "#F3ECDA"
                   onChangeText = {(text)=>{
                       this.setState({ storyTitle: text })
                   }}/>
@@ -51,6 +56,7 @@ export default class WriteStoryScreen extends React.Component{
                 <TextInput 
                   placeholder = "Author Name"
                   style = {styles.authorInputBox}
+                  placeholderTextColor = "#F3ECDA"
                   onChangeText = {(text)=>{
                       this.setState({ storyAuthor: text })
                   }}/>
@@ -59,6 +65,7 @@ export default class WriteStoryScreen extends React.Component{
                   multiline
                   placeholder = "Story"
                   style = {styles.storyInputBox}
+                  placeholderTextColor = "#F3ECDA"
                   onChangeText = {(text)=>{
                       this.setState({ story: text })
                   }}/>
@@ -67,10 +74,12 @@ export default class WriteStoryScreen extends React.Component{
                   style = {styles.submitButton}
                   onPress = {async ()=>{
                       this.submitStory();
+                      ToastAndroid.show("Story Submitted", ToastAndroid.SHORT);
+                      alert("Submitted I think");
                   }}>
                     <Text style = {styles.submitButtonText}>SUBMIT</Text>  
                 </TouchableOpacity>
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 
@@ -87,8 +96,7 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         color: "#fff",
         overflow: "scroll",
-        paddingLeft: 20,
-        placeholderTextColor: "#F3ECDA"
+        paddingLeft: 20,      
     },
 
     authorInputBox: {
@@ -101,7 +109,6 @@ const styles = StyleSheet.create({
         color: "#fff",
         overflow: "scroll",
         paddingLeft: 20,
-        placeholderTextColor: "#F3ECDA"
     },
 
     storyInputBox: {
@@ -113,7 +120,6 @@ const styles = StyleSheet.create({
         color: "#fff",
         overflow: "scroll",
         padding: 20,
-        placeholderTextColor: "#F3ECDA",
         marginBottom: 30
     },
 
