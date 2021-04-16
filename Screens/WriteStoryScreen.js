@@ -75,7 +75,6 @@ export default class WriteStoryScreen extends React.Component{
                   onPress = {async ()=>{
                       this.submitStory();
                       ToastAndroid.show("Story Submitted", ToastAndroid.SHORT);
-                      alert("Submitted I think");
                   }}>
                     <Text style = {styles.submitButtonText}>SUBMIT</Text>  
                 </TouchableOpacity>
