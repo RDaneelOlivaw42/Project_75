@@ -78,8 +78,8 @@ export default class App extends React.Component {
 
 
   render(){
-
     if(this.state.search === ''){
+      
       return(
         <View>
         <AppHeader />
