@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image } from 'react-native';
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Image, FlatList } from 'react-native';
 import AppHeader from "../AppHeader";
 import db from "../config";
 import firebase from 'firebase';
@@ -141,17 +141,19 @@ export default class App extends React.Component {
         </View>
 
 
-        <ScrollView>
-          {this.state.allStories.map((item,index)=>{
-            return(
-              <View style = {{margin: 6, borderBottomWidth: 2}}> 
+        <FlatList 
+          data = {this.state.allStories}
+
+          renderItem = {({item})=>(
+            <View style = {{margin: 6, borderBottomWidth: 2}}> 
                 <Text>{item.title}</Text>
                 <Text>{item.author}</Text>
                 <Text style = {{marginBottom: 5}}>{item.story}</Text>
-              </View>
-              )
-          })}
-        </ScrollView>
+            </View>
+          )}
+
+          keyExtractor = {(item, index)=> index.toString()}
+        />
 
       </View> 
       )
@@ -217,10 +219,11 @@ export default class App extends React.Component {
             </TouchableOpacity>
           </View>
  
-  
-          <ScrollView>
-            {this.state.searchedStory.map((item, index)=>{
-              return(
+
+          <FlatList 
+            data = {this.state.searchedStory}
+
+            renderItem = {({item})=>(
               <View style = {{margin: 6}}> 
                 <View style = {styles.lineLeft} /> 
                 <Text style = {styles.showText}>Search Results</Text> 
@@ -229,9 +232,10 @@ export default class App extends React.Component {
                 <Text>{item.author}</Text>
                 <Text>{item.story}</Text>
               </View>
-              )
-            })}
-          </ScrollView>
+            )}
+
+            keyExtractor = {(item, index)=> index.toString()}
+          />
   
         </View>
       )
