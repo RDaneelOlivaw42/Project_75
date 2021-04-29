@@ -3,14 +3,13 @@ require('@firebase/firestore')
 
 
 var firebaseConfig = {
-    apiKey: "AIzaSyCvnXkOZK5lcvJ-s9S9rzexDDTwRkiK3nw",
-    authDomain: "project-71-2be4d.firebaseapp.com",
-    projectId: "project-71-2be4d",
-    storageBucket: "project-71-2be4d.appspot.com",
-    messagingSenderId: "783896112940",
-    appId: "1:783896112940:web:43bd031bbc0d7d5b67c689"
-  };
-
+  apiKey: "AIzaSyCoH8oMEyKQ74xgoRT89R8H4ZyLXW_kVus",
+  authDomain: "project-73-c2071.firebaseapp.com",
+  projectId: "project-73-c2071",
+  storageBucket: "project-73-c2071.appspot.com",
+  messagingSenderId: "456606048169",
+  appId: "1:456606048169:web:7ffe3067b3a08a22fdaeb8"
+};
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 

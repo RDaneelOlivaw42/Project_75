@@ -20,9 +20,9 @@ export default class WriteStoryScreen extends React.Component{
 
 
     submitStory = async ()=>{
-        var title = this.state.storyTitle;
-        var author = this.state.storyAuthor;
-        var story = this.state.story;
+        var title = "Title: " + this.state.storyTitle;
+        var author = "Author: " + this.state.storyAuthor;
+        var story = "Story: " + this.state.story;
 
         db.collection("story").add({
             'title': title,
@@ -74,7 +74,7 @@ export default class WriteStoryScreen extends React.Component{
                   style = {styles.submitButton}
                   onPress = {async ()=>{
                       this.submitStory();
-                      ToastAndroid.show("Story Submitted", ToastAndroid.SHORT);
+                      /*ToastAndroid.show("Story Submitted", ToastAndroid.SHORT);*/
                   }}>
                     <Text style = {styles.submitButtonText}>SUBMIT</Text>  
                 </TouchableOpacity>
