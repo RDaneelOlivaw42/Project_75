@@ -323,20 +323,3 @@ const styles = StyleSheet.create({
   }
 
 });
-
-/*
-<FlatList 
-          data = {this.state.allStories}
-          
-          renderItem = {({item})=>(
-            <View style = {{borderBottomWidth: 2, margin: 6}}>
-              <Text>{item.title}</Text>
-              <Text>{item.author}</Text>
-              <Text style = {{height: 30,overflow: 'scroll', marginBottom: 10}}>{item.story}</Text>
-            </View>
-          )}
-
-          keyExtractor = {(item, index)=> index.toString()}
-        />
-
-*/
