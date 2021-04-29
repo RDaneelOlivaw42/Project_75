@@ -59,7 +59,7 @@ export default class App extends React.Component {
         this.setState({
           searchedStory: [...this.state.searchedStory, doc.data()]
         })
-      })
+      });
     }
   }
 
@@ -79,8 +79,9 @@ export default class App extends React.Component {
 
   render(){
 
-    return(
-      <View>
+    if(this.state.search === ''){
+      return(
+        <View>
         <AppHeader />
 
 
@@ -141,22 +142,102 @@ export default class App extends React.Component {
 
 
         <ScrollView>
-          {this.state.searchedStory.map((item, index)=>{
+          {this.state.allStories.map((item,index)=>{
             return(
-            <View style = {{margin: 6}}> 
-              <View style = {styles.lineLeft} /> 
-              <Text style = {styles.showText}>Search Results</Text> 
-              <View style = {styles.lineRight}/>
-              <Text style = {{marginTop: 10}}>{item.title}</Text>
-              <Text>{item.author}</Text>
-              <Text>{item.story}</Text>
-            </View>
-            )
+              <View style = {{margin: 6, borderBottomWidth: 2}}> 
+                <Text>{item.title}</Text>
+                <Text>{item.author}</Text>
+                <Text style = {{marginBottom: 5}}>{item.story}</Text>
+              </View>
+              )
           })}
         </ScrollView>
 
-      </View>
-    )
+      </View> 
+      )
+    }
+    else{
+      return(
+        <View>
+          <AppHeader />
+  
+  
+          <View style = {styles.searchStyle}>
+            <TextInput 
+              placeholder = "Filter and search for Title, Author or Story"
+              style = {styles.searchBarStyle}
+              placeholderTextColor = '#F3ECDA'
+              onChangeText = {(text)=>{
+                this.setState({ search: text })
+              }}
+              defaultValue = {this.state.filterState}
+              />
+  
+              <TouchableOpacity
+                onPress = {()=>{
+                  this.searchStory(this.state.search)
+                }}
+                style = {styles.searchButton}>
+                <Image source = {require('../assets/searchIcon.png')} style = {styles.iconImage}/>
+              </TouchableOpacity>
+          </View>
+  
+  
+          <View style = {styles.filterView}>
+            <Text style = {styles.labelText}>FILTER: </Text>
+  
+            <TouchableOpacity 
+              style = {styles.filterButton}
+              onPress = {()=>{
+                this.setState({
+                  filterState: 'Title: '
+                })
+              }}>
+                <Text style = {styles.filterButtonText}>TITLE</Text>
+            </TouchableOpacity>
+  
+            <TouchableOpacity
+              style = {styles.filterButton}
+              onPress = {()=>{
+                this.setState({
+                  filterState: 'Author: '
+                })
+              }}>
+              <Text style = {styles.filterButtonText}>AUTHOR</Text>
+            </TouchableOpacity>
+  
+            <TouchableOpacity
+              style = {styles.filterButton}
+              onPress = {()=>{
+                this.setState({
+                  filterState: 'Story: '
+                })
+              }}>
+              <Text style = {styles.filterButtonText}>STORY</Text>
+            </TouchableOpacity>
+          </View>
+ 
+  
+          <ScrollView>
+            {this.state.searchedStory.map((item, index)=>{
+              return(
+              <View style = {{margin: 6}}> 
+                <View style = {styles.lineLeft} /> 
+                <Text style = {styles.showText}>Search Results</Text> 
+                <View style = {styles.lineRight}/>
+                <Text style = {{marginTop: 10}}>{item.title}</Text>
+                <Text>{item.author}</Text>
+                <Text>{item.story}</Text>
+              </View>
+              )
+            })}
+          </ScrollView>
+  
+        </View>
+      )
+    }
+  
+    
   }
 
 }
@@ -225,6 +306,8 @@ const styles = StyleSheet.create({
   filterView: {
     flex: 4,
     flexDirection: 'row',
+    borderBottomWidth: 2,
+    paddingBottom: 10
   },
 
   labelText: {
