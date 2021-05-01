@@ -1,5 +1,5 @@
-# Project 74
+# Project 75
 
-Bed Time Stories, Stage 2
+Bed Time Stories, Stage 3
 
-Displaying stories with Flatlist component
+Added User-Authentication functionality
